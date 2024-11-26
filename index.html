@@ -1,16 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Send Telegram Message</title>
   <script>
     // Function to send a Telegram message
     function sendMessage() {
       const botToken = "7826060902:AAGPv3zQCNc47YfJUEwhD2qqXYMTbRYIJ8o";
       const userId = "7132001605";
-      const message = "Hello, this is a test message from your bot!";
+      const message = "Hello, this is a test message sent every 5 seconds!";
       const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
       const payload = {
@@ -37,16 +36,22 @@
         .catch((error) => console.error("Error:", error));
     }
 
-    // Automatically trigger the sendMessage function on page load
+    // Start sending messages every 5 seconds
+    function startSendingMessages() {
+      setInterval(() => {
+        sendMessage();
+      }, 5000); // 5000 milliseconds = 5 seconds
+    }
+
+    // Start when the page loads
     window.onload = function () {
-      sendMessage();
+      startSendingMessages();
     };
   </script>
 </head>
-
 <body>
-  <h1>Sending Telegram Message...</h1>
-  <p>If the page reloads, the message will be sent automatically.</p>
+  <h1>Sending Telegram Messages...</h1>
+  <p>A message will be sent every 5 seconds automatically.</p>
+  <p>Check the browser console for logs.</p>
 </body>
-
 </html>
