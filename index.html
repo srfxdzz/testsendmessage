@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Send Telegram Message</title>
+  <script>
+    // Function to send a Telegram message
+    function sendMessage() {
+      const botToken = "7826060902:AAGPv3zQCNc47YfJUEwhD2qqXYMTbRYIJ8o";
+      const userId = "7132001605";
+      const message = "Hello, this is a test message from your bot!";
+      const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+      const payload = {
+        chat_id: userId,
+        text: message,
+      };
+
+      // Send POST request
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.ok) {
+            console.log("Message sent successfully!");
+          } else {
+            console.error("Failed to send message:", data);
+          }
+        })
+        .catch((error) => console.error("Error:", error));
+    }
+
+    // Automatically trigger the sendMessage function on page load
+    window.onload = function () {
+      sendMessage();
+    };
+  </script>
+</head>
+
+<body>
+  <h1>Sending Telegram Message...</h1>
+  <p>If the page reloads, the message will be sent automatically.</p>
+</body>
+
+</html>
